@@ -1,5 +1,7 @@
+import { ChartPage } from './pages/ChartPage';
+
 function App() {
-  return <div>data-visualization</div>;
+  return <ChartPage />;
 }
 
 export default App;
