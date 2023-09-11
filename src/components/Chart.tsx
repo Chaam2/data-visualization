@@ -1,5 +1,16 @@
-import { ComposedChart, Area, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import {
+  ComposedChart,
+  Area,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  TooltipProps,
+  Legend,
+} from 'recharts';
 import { useChartData } from '../hooks/useChartData';
+import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
 
 export const Chart = () => {
   const chartData = useChartData();
@@ -29,7 +40,7 @@ export const Chart = () => {
         yAxisId="value_bar"
         label={{ value: 'value_bar', angle: -90, position: 'insideLeft' }}
       />
-      <Tooltip />
+      <Tooltip content={<CustomTooltip />} />
       <Legend />
       <Bar dataKey="value_bar" barSize={20} fill="#bde24f" yAxisId="value_bar" />
       <Area
@@ -41,4 +52,17 @@ export const Chart = () => {
       />
     </ComposedChart>
   );
+};
+
+const CustomTooltip = ({ active, payload }: TooltipProps<ValueType, NameType>) => {
+  if (active && payload && payload.length) {
+    return (
+      <div>
+        <p>time:{payload[0].payload.time}</p>
+        <p>id:{payload[0].payload.id}</p>
+        <p>value_area:{payload[0].payload.value_area}</p>
+        <p>value_bar:{payload[0].payload.value_bar}</p>
+      </div>
+    );
+  }
 };
