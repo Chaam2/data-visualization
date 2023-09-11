@@ -1,9 +1,9 @@
-import { useChartData } from '../hooks/useChartData';
+import { Chart } from '../components/Chart';
 
 export const ChartPage = () => {
-  const chartData = useChartData();
-
-  console.log(chartData);
-
-  return <div>ChartPage</div>;
+  return (
+    <div>
+      <Chart />
+    </div>
+  );
 };
