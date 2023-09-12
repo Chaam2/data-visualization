@@ -8,6 +8,7 @@ import {
   Tooltip,
   TooltipProps,
   Legend,
+  Cell,
 } from 'recharts';
 import { useChartData } from '../hooks/useChartData';
 import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
@@ -15,7 +16,7 @@ import { useSearchParams } from 'react-router-dom';
 
 export const Chart = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  // const id = searchParams.get('id');
+  const selectedId = searchParams.get('id');
 
   const chartData = useChartData();
   const uniqueIdsSet = new Set(chartData && chartData.map((data) => data.id));
@@ -70,7 +71,11 @@ export const Chart = () => {
         />
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar dataKey="value_bar" barSize={20} fill="#bde24f" yAxisId="value_bar" />
+        <Bar dataKey="value_bar" barSize={20} yAxisId="value_bar">
+          {chartData?.map((data) => (
+            <Cell key={data.id} fill={data.id === selectedId ? '#5ac5f2' : '#bde24f'} />
+          ))}
+        </Bar>
         <Area
           type="monotone"
           dataKey="value_area"
