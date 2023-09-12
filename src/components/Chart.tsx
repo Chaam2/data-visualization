@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
   Cell,
+  ResponsiveContainer,
 } from 'recharts';
 import { CustomTooltip } from '../components/CustomTooltip';
 import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
@@ -23,47 +24,47 @@ export const Chart = ({ chartData, searchParams, setSearchParams }: IChartProp) 
   };
 
   return (
-    <ComposedChart
-      width={1200}
-      height={500}
-      data={chartData}
-      margin={{
-        top: 20,
-        right: 20,
-        bottom: 20,
-        left: 20,
-      }}
-      onClick={handleChartClick}
-    >
-      <CartesianGrid stroke="#f5f5f5" />
-      <XAxis dataKey="time" scale="band" />
-      <YAxis
-        dataKey="value_area"
-        orientation="right"
-        yAxisId="value_area"
-        label={{ value: 'value_area', angle: -90, position: 'insideLeft' }}
-        domain={[0, 150]}
-      />
-      <YAxis
-        dataKey="value_bar"
-        yAxisId="value_bar"
-        label={{ value: 'value_bar', angle: -90, position: 'insideLeft' }}
-      />
-      <Tooltip content={<CustomTooltip />} />
-      <Legend />
-      <Bar dataKey="value_bar" barSize={20} yAxisId="value_bar">
-        {chartData?.map((data) => (
-          <Cell key={data.id} fill={data.id === selectedId ? '#5ac5f2' : '#bde24f'} />
-        ))}
-      </Bar>
-      <Area
-        type="monotone"
-        dataKey="value_area"
-        fill="#e166a3"
-        stroke="#f06aca"
-        yAxisId="value_area"
-      />
-    </ComposedChart>
+    <ResponsiveContainer width="96%" height={600}>
+      <ComposedChart
+        data={chartData}
+        margin={{
+          top: 40,
+          right: 20,
+          bottom: 20,
+          left: 20,
+        }}
+        onClick={handleChartClick}
+      >
+        <CartesianGrid stroke="#f5f5f5" />
+        <XAxis dataKey="time" scale="auto" />
+        <YAxis
+          dataKey="value_area"
+          orientation="right"
+          yAxisId="value_area"
+          label={{ value: 'Area', position: 'top', offset: 20 }}
+          domain={[0, 150]}
+        />
+        <YAxis
+          dataKey="value_bar"
+          yAxisId="value_bar"
+          label={{ value: 'Bar', position: 'top', offset: 20 }}
+        />
+        <Tooltip content={<CustomTooltip />} />
+        <Legend />
+        <Bar dataKey="value_bar" barSize={20} yAxisId="value_bar">
+          {chartData?.map((data) => (
+            <Cell key={data.id} fill={data.id === selectedId ? '#5ac5f2' : '#bde24f'} />
+          ))}
+        </Bar>
+        <Area
+          type="monotone"
+          dataKey="value_area"
+          fill="#e166a3"
+          stroke="#f06aca"
+          yAxisId="value_area"
+        />
+      </ComposedChart>
+    </ResponsiveContainer>
   );
 };
 
