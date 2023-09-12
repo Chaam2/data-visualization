@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 import { useChartData } from '../hooks/useChartData';
 import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 export const Chart = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,7 +31,7 @@ export const Chart = () => {
   return (
     <>
       <div>
-        <button>초기화</button>
+        <Link to="/">초기화</Link>
         {ids.map((id) => (
           <button
             key={id}
