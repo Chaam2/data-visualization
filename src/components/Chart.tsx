@@ -64,6 +64,7 @@ export const Chart = () => {
           orientation="right"
           yAxisId="value_area"
           label={{ value: 'value_area', angle: -90, position: 'insideLeft' }}
+          domain={[0, 150]}
         />
         <YAxis
           dataKey="value_bar"
