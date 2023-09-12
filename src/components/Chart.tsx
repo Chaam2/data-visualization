@@ -13,6 +13,7 @@ import {
 import { useChartData } from '../hooks/useChartData';
 import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
 import { Link, useSearchParams } from 'react-router-dom';
+import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
 
 export const Chart = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -22,7 +23,7 @@ export const Chart = () => {
   const uniqueIdsSet = new Set(chartData && chartData.map((data) => data.id));
   const ids = [...uniqueIdsSet];
 
-  const handleChartClick = (data: any) => {
+  const handleChartClick = (data: CategoricalChartState) => {
     if (!data.activePayload) return;
     const targetId = data.activePayload[0].payload.id;
     setSearchParams({ id: targetId });
