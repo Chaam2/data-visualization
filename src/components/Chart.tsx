@@ -11,18 +11,35 @@ import {
 } from 'recharts';
 import { useChartData } from '../hooks/useChartData';
 import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
+import { useSearchParams } from 'react-router-dom';
 
 export const Chart = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  // const id = searchParams.get('id');
+
   const chartData = useChartData();
   const uniqueIdsSet = new Set(chartData && chartData.map((data) => data.id));
   const ids = [...uniqueIdsSet];
+
+  const handleChartClick = (data: any) => {
+    if (!data.activePayload) return;
+    const targetId = data.activePayload[0].payload.id;
+    setSearchParams({ id: targetId });
+  };
 
   return (
     <>
       <div>
         <button>초기화</button>
         {ids.map((id) => (
-          <button key={id}>{id}</button>
+          <button
+            key={id}
+            onClick={() => {
+              setSearchParams({ id: id });
+            }}
+          >
+            {id}
+          </button>
         ))}
       </div>
 
@@ -36,6 +53,7 @@ export const Chart = () => {
           bottom: 20,
           left: 20,
         }}
+        onClick={handleChartClick}
       >
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis dataKey="time" scale="band" />
