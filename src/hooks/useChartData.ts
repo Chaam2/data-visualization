@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getChartData } from '../api/getChartData';
 import { IChartData, IResponseData } from '../@types';
+import dayjs from 'dayjs';
 
 export const useChartData = () => {
   const [chartData, setChartData] = useState<IChartData[]>();
@@ -10,8 +11,11 @@ export const useChartData = () => {
     const convertedData =
       responseData &&
       Object.entries(responseData).map(([time, data]) => {
+        const formattedDate = dayjs(time).format('YYYY-MM-DD');
+        const formattedTime = dayjs(time).format('hh:mm:ss');
         return {
-          time,
+          date: formattedDate,
+          time: formattedTime,
           id: data.id,
           value_area: data.value_area,
           value_bar: data.value_bar,

@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   Cell,
   ResponsiveContainer,
 } from 'recharts';
@@ -30,13 +29,13 @@ export const Chart = ({ chartData, searchParams, setSearchParams }: IChartProp) 
         margin={{
           top: 40,
           right: 20,
-          bottom: 20,
+          bottom: 40,
           left: 20,
         }}
         onClick={handleChartClick}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey="time" scale="auto" />
+        <XAxis dataKey="time" scale="auto" angle={-30} tick={{ dy: 20, dx: -30 }} />
         <YAxis
           dataKey="value_area"
           orientation="right"
@@ -50,7 +49,7 @@ export const Chart = ({ chartData, searchParams, setSearchParams }: IChartProp) 
           label={{ value: 'Bar', position: 'top', offset: 20 }}
         />
         <Tooltip content={<CustomTooltip />} />
-        <Legend />
+
         <Bar dataKey="value_bar" barSize={20} yAxisId="value_bar">
           {chartData?.map((data) => (
             <Cell key={data.id} fill={data.id === selectedId ? '#5ac5f2' : '#bde24f'} />

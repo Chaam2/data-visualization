@@ -6,6 +6,7 @@ export interface IResponseData {
   };
 }
 export interface IChartData {
+  date: string;
   time: string;
   id: string;
   value_area: number;
