@@ -11,7 +11,7 @@ export const useChartData = () => {
     const convertedData =
       responseData &&
       Object.entries(responseData).map(([time, data]) => {
-        const formattedDate = dayjs(time).format('YYYY-MM-DD');
+        const formattedDate = dayjs(time).format('YYYY.MM.DD');
         const formattedTime = dayjs(time).format('hh:mm:ss');
         return {
           date: formattedDate,
