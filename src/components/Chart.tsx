@@ -15,9 +15,8 @@ import { SetURLSearchParams } from 'react-router-dom';
 import { IChartData } from '../@types';
 import { useState } from 'react';
 
-export const Chart = ({ chartData, searchParams, setSearchParams }: IChartProp) => {
+export const Chart = ({ chartData, selectedId, setSearchParams }: IChartProp) => {
   const [selectedDate, setSelectedDate] = useState('2023.02.01');
-  const selectedId = searchParams.get('id');
   const handleChartClick = (data: CategoricalChartState) => {
     if (!data.activePayload) return;
     const targetId = data.activePayload[0].payload.id;
@@ -84,6 +83,6 @@ export const Chart = ({ chartData, searchParams, setSearchParams }: IChartProp) 
 
 interface IChartProp {
   chartData: IChartData[] | undefined;
-  searchParams: URLSearchParams;
+  selectedId: string | null;
   setSearchParams: SetURLSearchParams;
 }
