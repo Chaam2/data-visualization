@@ -27,23 +27,23 @@ export const Chart = ({ chartData, selectedId, setSearchParams }: IChartProp) =>
   const filteredData = chartData?.filter((data) => data.date === selectedDate);
 
   return (
-    <>
-      <label htmlFor="date">조회 일자</label>
-      <select id="date" onChange={(e) => setSelectedDate(e.target.value)}>
-        {dates.map((date) => (
-          <option key={date} value={date}>
-            {date}
-          </option>
-        ))}
-      </select>
-      <ResponsiveContainer width="96%" height={600}>
+    <div className="flex flex-col gap-4">
+      <div className="self-end">
+        <label htmlFor="date">조회 일자</label>
+        <select id="date" onChange={(e) => setSelectedDate(e.target.value)}>
+          {dates.map((date) => (
+            <option key={date} value={date}>
+              {date}
+            </option>
+          ))}
+        </select>
+      </div>
+      <ResponsiveContainer width="100%" height={600}>
         <ComposedChart
           data={filteredData}
           margin={{
             top: 40,
-            right: 20,
             bottom: 40,
-            left: 20,
           }}
           onClick={handleChartClick}
         >
@@ -77,7 +77,7 @@ export const Chart = ({ chartData, selectedId, setSearchParams }: IChartProp) =>
           />
         </ComposedChart>
       </ResponsiveContainer>
-    </>
+    </div>
   );
 };
 

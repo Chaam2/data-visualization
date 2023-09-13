@@ -11,9 +11,9 @@ export const ChartPage = () => {
   const selectedId = searchParams.get('id');
 
   return (
-    <>
+    <div className="m-9">
       <FilterButtons ids={ids} selectedId={selectedId} setSearchParams={setSearchParams} />
       <Chart chartData={chartData} selectedId={selectedId} setSearchParams={setSearchParams} />
-    </>
+    </div>
   );
 };
