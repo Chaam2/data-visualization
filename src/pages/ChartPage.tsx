@@ -12,7 +12,7 @@ export const ChartPage = () => {
 
   return (
     <>
-      <FilterButtons ids={ids} setSearchParams={setSearchParams} />
+      <FilterButtons ids={ids} selectedId={selectedId} setSearchParams={setSearchParams} />
       <Chart chartData={chartData} selectedId={selectedId} setSearchParams={setSearchParams} />
     </>
   );
